@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="jp" style="scroll-padding-top:100px;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novel.+</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+    </script> 
+    <!-- css -->
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    .novel-container {
+        margin-top: 20px;
+    }
+
+    .novel {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+
+<body>
+    <!-- Navi -->
+    <div id="navigation-container"></div>
+    <script>
+    // JavaScriptを使用してナビゲーションを読み込む
+    fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+        document.getElementById('navigation-container').innerHTML = data;
+        });
+    </script>
+
+    <h1>小説投稿</h1>
+
+    <form id="novelForm">
+        <label for="title">タイトル:</label>
+        <input type="text" id="title" name="title" required><br>
+    
+        <label for="content">内容:</label><br>
+        <textarea id="content" name="content" rows="4" cols="50" required></textarea><br>
+    
+        <button type="button" onclick="submitNovel()">投稿</button>
+    </form>
+    
+    <div class="novel-container">
+        <h2>投稿された小説一覧</h2>
+        <div id="novelList"></div>
+    </div>
+    
+    <script>
+        // 小説データを格納する配列
+        var novels = [];
+    
+        function submitNovel() {
+            // フォームからデータを取得
+            var title = document.getElementById('title').value;
+            var content = document.getElementById('content').value;
+    
+            // 新しい小説オブジェクトを作成
+            var novel = { title: title, content: content };
+    
+            // 小説を配列に追加
+            novels.push(novel);
+    
+            // 新しい小説を表示
+            displayNovel(novel);
+    
+            // フォームをクリア
+            document.getElementById('novelForm').reset();
+        }
+    
+        function displayNovel(novel) {
+            // 新しい小説を表示
+            var novelList = document.getElementById('novelList');
+            var novelItem = document.createElement('div');
+            novelItem.classList.add('novel');
+            novelItem.innerHTML = '<strong>' + novel.title + '</strong><br>' + novel.content;
+            novelList.appendChild(novelItem);
+        }
+    </script>
+
+
+<!-- それぞれの小説閲覧ページ -->
+<div>
+    <h1>空へ</h1><!-- 小説タイトル -->
+    <div class="col-md-3 rounded-image">
+        <img src="image0.jpg" alt="Your Image"> <!-- 画像を挿入 -->
+    </div>
+    <div class="col-md-9">
+        <h3 class="text-move">あらすじ</h3>
+        <p class="text-move">
+            高校生の夏休み、天文部員の少年は偶然見つけた古びた望遠鏡で星を観察する。
+            不思議な力に導かれ、星座がかたち取る魔法の扉が開かれる。
+            彼は友達と共に、星の世界へ飛び込む決断をする。
+            未知なる冒険が彼らを待ち受け、夢と冒険が交錯する空の旅が始まる。
+        </p>
+    </div>
+
+    <div>
+        <li>第1話<a href="read2.html">空を見上げて</a></li>
+        <li>第2話<a href="空へ2.html">空</a></li>
+        <li>第3話<a href="空へ3.html">見上げて</a></li>
+        <li>第4話<a href="空へ4.html">空を見上げて</a></li>
+    </div>
+</div>
+
+ <!-- Bootstrapのフッター -->
+    <footer class="footer">
+        <div class="container text-black text-end my-0">
+            <span>© 2023 Novelize Supporter All rights reserved.</span>
+        </div>
+    </footer>
+    
+</body>
+</html>
